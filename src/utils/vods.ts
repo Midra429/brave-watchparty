@@ -67,31 +67,31 @@ export const BWP_VODS: {
     },
   },
 
-  {
-    id: 'dmmtv',
-    name: 'DMM TV',
-    hostnames: ['tv.dmm.com'],
+  // {
+  //   id: 'dmmtv',
+  //   name: 'DMM TV',
+  //   hostnames: ['tv.dmm.com'],
 
-    getVideoId: (url: string | URL) => {
-      try {
-        const { searchParams } = new URL(url)
+  //   getVideoId: (url: string | URL) => {
+  //     try {
+  //       const { searchParams } = new URL(url)
 
-        const season = searchParams.get('season')
-        const content = searchParams.get('content')
+  //       const season = searchParams.get('season')
+  //       const content = searchParams.get('content')
 
-        return season && content ? `season=${season}&content=${content}` : null
-      } catch {}
+  //       return season && content ? `season=${season}&content=${content}` : null
+  //     } catch {}
 
-      return null
-    },
+  //     return null
+  //   },
 
-    getWatchPageUrl: (videoId: string) => {
-      const url = new URL('/vod/playback/', 'https://tv.dmm.com')
-      url.search = videoId
+  //   getWatchPageUrl: (videoId: string) => {
+  //     const url = new URL('/vod/playback/', 'https://tv.dmm.com')
+  //     url.search = videoId
 
-      return url.href
-    },
-  },
+  //     return url.href
+  //   },
+  // },
 
   {
     id: 'abema',
@@ -117,56 +117,56 @@ export const BWP_VODS: {
     },
   },
 
-  {
-    id: 'niconico',
-    name: 'ニコニコ',
-    hostnames: ['www.nicovideo.jp', 'sp.nicovideo.jp'],
+  // {
+  //   id: 'niconico',
+  //   name: 'ニコニコ',
+  //   hostnames: ['www.nicovideo.jp', 'sp.nicovideo.jp'],
 
-    getVideoId: (url: string | URL) => {
-      try {
-        const { href } = new URL(url)
-        const regexp = /\/watch\/(?<id>[a-z]{2}\d+)/
-        const matched = href.match(regexp)
+  //   getVideoId: (url: string | URL) => {
+  //     try {
+  //       const { href } = new URL(url)
+  //       const regexp = /\/watch\/(?<id>[a-z]{2}\d+)/
+  //       const matched = href.match(regexp)
 
-        return matched?.groups?.id ?? null
-      } catch {}
+  //       return matched?.groups?.id ?? null
+  //     } catch {}
 
-      return null
-    },
+  //     return null
+  //   },
 
-    getWatchPageUrl: (videoId: string) => {
-      const url = new URL(`/watch/${videoId}`, 'https://www.nicovideo.jp')
+  //   getWatchPageUrl: (videoId: string) => {
+  //     const url = new URL(`/watch/${videoId}`, 'https://www.nicovideo.jp')
 
-      return url.href
-    },
-  },
+  //     return url.href
+  //   },
+  // },
 
-  {
-    id: 'youtube',
-    name: 'YouTube',
-    hostnames: ['www.youtube.com', 'm.youtube.com', 'youtu.be'],
+  // {
+  //   id: 'youtube',
+  //   name: 'YouTube',
+  //   hostnames: ['www.youtube.com', 'm.youtube.com', 'youtu.be'],
 
-    getVideoId: (url: string | URL) => {
-      try {
-        const { hostname, pathname, searchParams } = new URL(url)
+  //   getVideoId: (url: string | URL) => {
+  //     try {
+  //       const { hostname, pathname, searchParams } = new URL(url)
 
-        if (hostname === 'youtu.be') {
-          return pathname.slice(1) ?? null
-        }
+  //       if (hostname === 'youtu.be') {
+  //         return pathname.slice(1) ?? null
+  //       }
 
-        return searchParams.get('v') ?? null
-      } catch {}
+  //       return searchParams.get('v') ?? null
+  //     } catch {}
 
-      return null
-    },
+  //     return null
+  //   },
 
-    getWatchPageUrl: (videoId: string) => {
-      const url = new URL('/watch', 'https://www.youtube.com')
-      url.searchParams.set('v', videoId)
+  //   getWatchPageUrl: (videoId: string) => {
+  //     const url = new URL('/watch', 'https://www.youtube.com')
+  //     url.searchParams.set('v', videoId)
 
-      return url.href
-    },
-  },
+  //     return url.href
+  //   },
+  // },
 ]
 
 export const getVodByURL = (url: string | URL) => {
