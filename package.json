@@ -36,9 +36,6 @@
 		"permissions": [
 			"tabs"
 		],
-		"host_permissions": [
-			"https://*/*"
-		],
 		"browser_specific_settings": {
 			"gecko": {
 				"id": "brave-watchparty@midra.me"

@@ -227,8 +227,6 @@ export class BwpVodMod {
   // #onTimeupdate(evt: HTMLVideoElementEventMap['timeupdate']) {}
 
   #onMessage([message, sender, sendResponse]: MessageCallbackArgs) {
-    console.log(message, sender, sendResponse)
-
     if (message.name === 'leave') {
       this.dispose()
     }
