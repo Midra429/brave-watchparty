@@ -1,7 +1,7 @@
 {
 	"name": "brave-watchparty",
 	"displayName": "Brave Watchparty",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "説明しよう！君たちと私の熱い魂が呼応した時、開催するように設定してある、その名もブレイブウォッチパーティ。",
 	"author": "Midra",
 	"scripts": {
@@ -33,6 +33,7 @@
 		"typescript": "5.3.3"
 	},
 	"manifest": {
+		"homepage_url": "https://github.com/Midra429/brave-watchparty",
 		"permissions": [
 			"tabs"
 		],
