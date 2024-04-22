@@ -2,9 +2,10 @@ export type BwpVodId =
   | 'primevideo'
   | 'danime'
   | 'dmmtv'
+  | 'unext'
   | 'abema'
-  | 'niconico'
   | 'youtube'
+  | 'niconico'
 
 export const BWP_VODS: {
   id: BwpVodId
@@ -67,31 +68,56 @@ export const BWP_VODS: {
     },
   },
 
-  // {
-  //   id: 'dmmtv',
-  //   name: 'DMM TV',
-  //   hostnames: ['tv.dmm.com'],
+  {
+    id: 'dmmtv',
+    name: 'DMM TV',
+    hostnames: ['tv.dmm.com'],
 
-  //   getVideoId: (url: string | URL) => {
-  //     try {
-  //       const { searchParams } = new URL(url)
+    getVideoId: (url: string | URL) => {
+      try {
+        const { searchParams } = new URL(url)
 
-  //       const season = searchParams.get('season')
-  //       const content = searchParams.get('content')
+        const season = searchParams.get('season')
+        const content = searchParams.get('content')
 
-  //       return season && content ? `season=${season}&content=${content}` : null
-  //     } catch {}
+        return season && content ? `season=${season}&content=${content}` : null
+      } catch {}
 
-  //     return null
-  //   },
+      return null
+    },
 
-  //   getWatchPageUrl: (videoId: string) => {
-  //     const url = new URL('/vod/playback/', 'https://tv.dmm.com')
-  //     url.search = videoId
+    getWatchPageUrl: (videoId: string) => {
+      const url = new URL('/vod/playback/', 'https://tv.dmm.com')
+      url.search = videoId
 
-  //     return url.href
-  //   },
-  // },
+      return url.href
+    },
+  },
+
+  {
+    id: 'unext',
+    name: 'U-NEXT',
+    hostnames: ['video.unext.jp'],
+
+    getVideoId: (url: string | URL) => {
+      try {
+        const { pathname } = new URL(url)
+        const regexp = /^\/play\/(?<id>SID\d+\/ED\d+)/
+        const matched = pathname.match(regexp)
+
+        return matched?.groups?.id ?? null
+      } catch {}
+
+      return null
+    },
+
+    getWatchPageUrl: (videoId: string) => {
+      const url = new URL(`/play/${videoId}`, 'https://video.unext.jp')
+      url.search = videoId
+
+      return url.href
+    },
+  },
 
   {
     id: 'abema',
@@ -100,9 +126,9 @@ export const BWP_VODS: {
 
     getVideoId: (url: string | URL) => {
       try {
-        const { href } = new URL(url)
-        const regexp = /\/video\/episode\/(?<id>[a-z0-9_\-]+)/
-        const matched = href.match(regexp)
+        const { pathname } = new URL(url)
+        const regexp = /^\/video\/episode\/(?<id>[a-z0-9_\-]+)/
+        const matched = pathname.match(regexp)
 
         return matched?.groups?.id ?? null
       } catch {}
@@ -116,30 +142,6 @@ export const BWP_VODS: {
       return url.href
     },
   },
-
-  // {
-  //   id: 'niconico',
-  //   name: 'ニコニコ',
-  //   hostnames: ['www.nicovideo.jp', 'sp.nicovideo.jp'],
-
-  //   getVideoId: (url: string | URL) => {
-  //     try {
-  //       const { href } = new URL(url)
-  //       const regexp = /\/watch\/(?<id>[a-z]{2}\d+)/
-  //       const matched = href.match(regexp)
-
-  //       return matched?.groups?.id ?? null
-  //     } catch {}
-
-  //     return null
-  //   },
-
-  //   getWatchPageUrl: (videoId: string) => {
-  //     const url = new URL(`/watch/${videoId}`, 'https://www.nicovideo.jp')
-
-  //     return url.href
-  //   },
-  // },
 
   // {
   //   id: 'youtube',
@@ -163,6 +165,30 @@ export const BWP_VODS: {
   //   getWatchPageUrl: (videoId: string) => {
   //     const url = new URL('/watch', 'https://www.youtube.com')
   //     url.searchParams.set('v', videoId)
+
+  //     return url.href
+  //   },
+  // },
+
+  // {
+  //   id: 'niconico',
+  //   name: 'ニコニコ',
+  //   hostnames: ['www.nicovideo.jp', 'sp.nicovideo.jp'],
+
+  //   getVideoId: (url: string | URL) => {
+  //     try {
+  //       const { href } = new URL(url)
+  //       const regexp = /\/watch\/(?<id>[a-z]{2}\d+)/
+  //       const matched = href.match(regexp)
+
+  //       return matched?.groups?.id ?? null
+  //     } catch {}
+
+  //     return null
+  //   },
+
+  //   getWatchPageUrl: (videoId: string) => {
+  //     const url = new URL(`/watch/${videoId}`, 'https://www.nicovideo.jp')
 
   //     return url.href
   //   },
