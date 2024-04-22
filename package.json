@@ -1,46 +1,46 @@
 {
-	"name": "brave-watchparty",
-	"displayName": "Brave Watchparty",
-	"version": "0.2.1",
-	"description": "説明しよう！君たちと私の熱い魂が呼応した時、開催するように設定してある、その名もブレイブウォッチパーティ。",
-	"author": "Midra",
-	"scripts": {
-		"dev": "plasmo dev",
-		"build": "plasmo build",
-		"package": "plasmo package"
-	},
-	"dependencies": {
-		"@ant-design/icons": "^5.3.6",
-		"@plasmohq/messaging": "^0.6.2",
-		"@plasmohq/storage": "^1.10.0",
-		"ably": "^2.0.3",
-		"antd": "^5.16.4",
-		"misskey-js": "^2024.3.1",
-		"nanoid": "^5.0.7",
-		"plasmo": "0.85.2",
-		"react": "18.2.0",
-		"react-dom": "18.2.0",
-		"ress": "^5.0.2",
-		"tlds": "^1.252.0",
-		"webextension-polyfill": "^0.10.0"
-	},
-	"devDependencies": {
-		"@types/chrome": "0.0.258",
-		"@types/node": "20.11.5",
-		"@types/react": "18.2.48",
-		"@types/react-dom": "18.2.18",
-		"@types/webextension-polyfill": "^0.10.7",
-		"typescript": "5.3.3"
-	},
-	"manifest": {
-		"homepage_url": "https://github.com/Midra429/brave-watchparty",
-		"permissions": [
-			"tabs"
-		],
-		"browser_specific_settings": {
-			"gecko": {
-				"id": "brave-watchparty@midra.me"
-			}
-		}
-	}
+  "name": "brave-watchparty",
+  "displayName": "Brave Watchparty",
+  "version": "0.2.1",
+  "description": "説明しよう！君たちと私の熱い魂が呼応した時、開催するように設定してある、その名もブレイブウォッチパーティ。",
+  "author": "Midra",
+  "scripts": {
+    "dev": "plasmo dev",
+    "build": "plasmo build",
+    "package": "plasmo package"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.3.6",
+    "@plasmohq/messaging": "^0.6.2",
+    "@plasmohq/storage": "^1.10.0",
+    "ably": "^2.0.3",
+    "antd": "^5.16.4",
+    "misskey-js": "^2024.3.1",
+    "nanoid": "^5.0.7",
+    "plasmo": "0.85.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "ress": "^5.0.2",
+    "tlds": "^1.252.0",
+    "webextension-polyfill": "^0.10.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "0.0.258",
+    "@types/node": "20.11.5",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "@types/webextension-polyfill": "^0.10.7",
+    "typescript": "5.3.3"
+  },
+  "manifest": {
+    "homepage_url": "https://github.com/Midra429/brave-watchparty",
+    "permissions": [
+      "tabs"
+    ],
+    "browser_specific_settings": {
+      "gecko": {
+        "id": "brave-watchparty@midra.me"
+      }
+    }
+  }
 }
