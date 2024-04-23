@@ -25,19 +25,35 @@ const getVideoDetail = async (items: StorageItems['playing_items']) => {
   return null
 }
 
+webext.action.setBadgeBackgroundColor({
+  color: '#808080',
+})
+webext.action.setBadgeTextColor({
+  color: '#fff',
+})
+webext.action.setBadgeText({
+  text: '',
+})
+
 AblyApi.close()
 
 storage.watch({
   joined_state_ping: ({ newValue }) => {
-    if (newValue) {
+    if (typeof newValue !== 'undefined') {
       webext.action.setBadgeBackgroundColor({
         color: newValue < 300 ? '#52c41a' : '#faad14',
       })
-      webext.action.setBadgeTextColor({
-        color: '#fff',
+    } else {
+      webext.action.setBadgeBackgroundColor({
+        color: '#808080',
       })
+    }
+  },
+
+  joined_members: ({ newValue }) => {
+    if (typeof newValue !== 'undefined') {
       webext.action.setBadgeText({
-        text: ' ',
+        text: newValue.length.toString(),
       })
     } else {
       webext.action.setBadgeText({
