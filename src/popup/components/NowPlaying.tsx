@@ -5,6 +5,7 @@ import {
   MinusCircleOutlined,
   PlusCircleOutlined,
   PlayCircleTwoTone,
+  ClearOutlined,
 } from '@ant-design/icons'
 import { webext } from '@/webext'
 import { useStorage } from '@/utils/storage'
@@ -159,43 +160,69 @@ export const NowPlaying: React.FC = () => {
       />
 
       {isHost && (
-        <Space.Compact
+        <Flex
+          gap="small"
           style={{
             marginTop: 'auto',
             padding: 12,
             borderTop: '1px solid #f0f0f0',
           }}
         >
-          <Input
-            placeholder="動画視聴ページのURL"
-            value={pendingVodUrl}
-            onChange={(evt) => setPendingVodUrl(evt.target.value)}
-          />
-
-          <Button
-            type="primary"
-            icon={<PlusCircleOutlined />}
-            disabled={
-              !pendingVod || items?.some(({ vodId }) => vodId === pendingVod.id)
-            }
-            onClick={async () => {
-              const vodId = pendingVod?.id
-              const videoId = pendingVod?.getVideoId(pendingVodUrl ?? '')
-
-              if (vodId && videoId) {
+          {!!items?.length && (
+            <Popconfirm
+              placement="topRight"
+              title="リストをクリアしますか？"
+              okButtonProps={{
+                danger: true,
+              }}
+              zIndex={1071}
+              onConfirm={async () => {
                 await sendToBackground({
                   name: 'room',
                   body: {
                     type: 'pub:change',
-                    items: [...(playingItems ?? []), { vodId, videoId }],
+                    items: [],
                   },
                 })
+              }}
+            >
+              <Button shape="circle" danger icon={<ClearOutlined />} />
+            </Popconfirm>
+          )}
 
-                setPendingVodUrl('')
+          <Space.Compact style={{ width: '100%' }}>
+            <Input
+              placeholder="動画視聴ページのURL"
+              value={pendingVodUrl}
+              onChange={(evt) => setPendingVodUrl(evt.target.value)}
+            />
+
+            <Button
+              type="primary"
+              icon={<PlusCircleOutlined />}
+              disabled={
+                !pendingVod ||
+                items?.some(({ vodId }) => vodId === pendingVod.id)
               }
-            }}
-          />
-        </Space.Compact>
+              onClick={async () => {
+                const vodId = pendingVod?.id
+                const videoId = pendingVod?.getVideoId(pendingVodUrl ?? '')
+
+                if (vodId && videoId) {
+                  await sendToBackground({
+                    name: 'room',
+                    body: {
+                      type: 'pub:change',
+                      items: [...(playingItems ?? []), { vodId, videoId }],
+                    },
+                  })
+
+                  setPendingVodUrl('')
+                }
+              }}
+            />
+          </Space.Compact>
+        </Flex>
       )}
     </Flex>
   )
