@@ -28,7 +28,7 @@ window.addEventListener('load', async () => {
   const obs = new MutationObserver(() => {
     if (location.pathname.startsWith('/video/episode/')) {
       const video = document.querySelector<HTMLVideoElement>(
-        '.com-a-Video__video-element'
+        '.com-a-Video__video > :is(video[preload="metadata"], .com-a-Video__video-element)'
       )
 
       if (video) {
