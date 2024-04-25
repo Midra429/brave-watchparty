@@ -54,7 +54,7 @@ export const LoginPane: React.FC = () => {
               url.searchParams.set('callback', `${BACKEND_URL}/miauth/callback`)
               url.searchParams.set('permission', 'read:account')
 
-              window.open(url)
+              webext.tabs.create({ url: url.toString() })
             }}
           >
             ログイン
