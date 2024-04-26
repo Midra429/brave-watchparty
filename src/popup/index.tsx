@@ -8,8 +8,9 @@ import { useStorage } from '@/utils/storage'
 import { LoginPane } from './LoginPane'
 import { GuestPane } from './GuestPane'
 import { HostPane } from './HostPane'
+import { SidePane } from './SidePane'
 import { SettingDrawer } from './SettingDrawer'
-import { NowPlaying } from './components/NowPlaying'
+import { MainButton } from './components/MainButton'
 
 import 'ress'
 
@@ -41,54 +42,60 @@ const Popup: React.FC = () => {
       >
         {isLogin ? (
           <Flex>
-            {isJoined && <NowPlaying />}
+            {isJoined && <SidePane />}
 
-            <Tabs
-              centered
-              style={{ width: 350 }}
-              tabBarStyle={{ marginBottom: 0 }}
-              destroyInactiveTabPane
-              activeKey={!hasHostPrivileges ? 'guest' : mode}
-              items={(
-                [
-                  {
-                    key: 'guest',
-                    icon: <UserOutlined />,
-                    label: '参加者',
-                    children: <GuestPane />,
-                    disabled: isJoined,
-                  },
-                  {
-                    key: 'host',
-                    icon: <HomeOutlined />,
-                    label: 'ホスト',
-                    children: <HostPane />,
-                    disabled: !hasHostPrivileges || isJoined,
-                  },
-                ] as Required<TabsProps>['items']
-              ).map((item) => ({
-                ...item,
-                icon: item.icon && (
-                  <span style={{ marginLeft: '1em' }}>{item.icon}</span>
-                ),
-                label: item.label && (
-                  <span style={{ marginRight: '1em' }}>{item.label}</span>
-                ),
-                children: item.children && (
-                  <div style={{ padding: 12 }}>{item.children}</div>
-                ),
-              }))}
-              tabBarExtraContent={
-                <Button
-                  shape="circle"
-                  icon={<SettingOutlined />}
-                  style={{ marginRight: 8 }}
-                  disabled={isJoined}
-                  onClick={() => setIsDrawerOpen(true)}
-                />
-              }
-              onChange={(key) => !isJoined && setMode(key as 'guest' | 'host')}
-            />
+            <Flex vertical>
+              <Tabs
+                centered
+                style={{ width: 350 }}
+                tabBarStyle={{ marginBottom: 0 }}
+                destroyInactiveTabPane
+                activeKey={!hasHostPrivileges ? 'guest' : mode}
+                items={(
+                  [
+                    {
+                      key: 'guest',
+                      icon: <UserOutlined />,
+                      label: '参加者',
+                      children: <GuestPane />,
+                      disabled: isJoined,
+                    },
+                    {
+                      key: 'host',
+                      icon: <HomeOutlined />,
+                      label: 'ホスト',
+                      children: <HostPane />,
+                      disabled: !hasHostPrivileges || isJoined,
+                    },
+                  ] as Required<TabsProps>['items']
+                ).map((item) => ({
+                  ...item,
+                  icon: item.icon && (
+                    <span style={{ marginLeft: '1em' }}>{item.icon}</span>
+                  ),
+                  label: item.label && (
+                    <span style={{ marginRight: '1em' }}>{item.label}</span>
+                  ),
+                  children: item.children && (
+                    <div style={{ padding: 12 }}>{item.children}</div>
+                  ),
+                }))}
+                tabBarExtraContent={
+                  <Button
+                    shape="circle"
+                    icon={<SettingOutlined />}
+                    style={{ marginRight: 8 }}
+                    disabled={isJoined}
+                    onClick={() => setIsDrawerOpen(true)}
+                  />
+                }
+                onChange={(key) =>
+                  !isJoined && setMode(key as 'guest' | 'host')
+                }
+              />
+
+              <MainButton />
+            </Flex>
 
             <SettingDrawer open={isDrawerOpen} setOpen={setIsDrawerOpen} />
           </Flex>
