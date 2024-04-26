@@ -5,6 +5,7 @@ import type { StorageItems } from '@/types/storage'
 // @ts-expect-error
 import * as Ably from 'ably/build/ably'
 import { BACKEND_URL } from '@/constants'
+import { webext } from '@/webext'
 import { storage } from '@/utils/storage'
 import { RoomAPI } from './room'
 
@@ -26,10 +27,12 @@ export type AblyMessageData = {
   }
 }
 
-export type PresenceData = {
-  name?: string | null
-  avatar?: string | null
-}
+export type PresenceData = Omit<
+  NonNullable<StorageItems['joined_members']>[number],
+  'id'
+>
+
+const manifest = webext.runtime.getManifest()
 
 storage.watch({
   misskey_session: () => AblyApi.close(),
@@ -45,6 +48,8 @@ const presenceMessagesToMembers = (
       id: message.clientId,
       name: data?.name ?? null,
       avatar: data?.avatar ?? null,
+      vod_ids: data?.vod_ids ?? null,
+      version: data?.version ?? null,
     }
   })
 }
@@ -240,11 +245,16 @@ export class AblyApi {
     })
 
     this.#channel.whenState('attached').then(async () => {
-      const user = await storage.get('misskey_user')
+      const { vod_ids, misskey_user } = await storage.get(
+        'vod_ids',
+        'misskey_user'
+      )
 
       this.#channel?.presence.enter({
-        name: user?.name,
-        avatar: user?.avatarUrl,
+        name: misskey_user?.name,
+        avatar: misskey_user?.avatarUrl,
+        vod_ids: vod_ids,
+        version: manifest.version,
       } as PresenceData)
     })
 

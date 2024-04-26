@@ -18,6 +18,8 @@ export type StorageItems = Partial<{
     id: string
     name: string | null
     avatar: string | null
+    vod_ids: BwpVodId[] | null
+    version: string | null
   }[]
   joined_state_ping: number
 
