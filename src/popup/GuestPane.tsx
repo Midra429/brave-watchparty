@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { Flex, Space, Button, Input, Popconfirm, Tooltip, message } from 'antd'
-import { HomeOutlined, LoginOutlined, LogoutOutlined } from '@ant-design/icons'
+import { Flex, Space, Button, Input, Tooltip, message } from 'antd'
+import { HomeOutlined, LoginOutlined } from '@ant-design/icons'
 import { validateRoomId } from '@/utils/validate'
 import { useStorage } from '@/utils/storage'
 import { sendToBackground } from '@/utils/messaging'
@@ -22,29 +22,6 @@ export const GuestPane: React.FC = () => {
           <JoinedStatus />
 
           <RoomIdAndURL id={joinedRoom.id} />
-
-          <Popconfirm
-            title="退室しますか？"
-            description="現在入っている部屋から出ます。"
-            okButtonProps={{
-              danger: true,
-            }}
-            zIndex={1071}
-            onConfirm={async () => {
-              setLoading(true)
-
-              await sendToBackground({
-                name: 'room',
-                body: { type: 'leave' },
-              })
-
-              setLoading(false)
-            }}
-          >
-            <Button block shape="round" danger icon={<LogoutOutlined />}>
-              部屋から出る
-            </Button>
-          </Popconfirm>
         </>
       ) : (
         <Space.Compact>
