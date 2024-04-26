@@ -22,7 +22,11 @@ export const UserItem: React.FC<{
   }[size || 'default']
 
   return (
-    <Flex align="center" gap="small" style={{ width: '100%' }}>
+    <Flex
+      align="center"
+      gap="small"
+      style={{ width: '100%', overflow: 'hidden' }}
+    >
       <Avatar
         size={size}
         icon={!avatar ? <UserOutlined /> : undefined}
