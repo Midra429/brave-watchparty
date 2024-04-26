@@ -23,8 +23,8 @@ export const NowPlaying: React.FC = () => {
   const [currentVodId] = useStorage('current_vod_id')
   const [playingItems] = useStorage('playing_items')
 
-  const pendingVod = getVodByURL(pendingVodUrl ?? '')
   const isHost = mode === 'host'
+  const pendingVod = getVodByURL(pendingVodUrl ?? '')
 
   useEffect(() => {
     if (typeof currentTabId !== 'undefined') {
@@ -61,20 +61,18 @@ export const NowPlaying: React.FC = () => {
   }
 
   return (
-    <Flex
-      vertical
-      style={{
-        width: 300,
-        borderRight: '1px solid #f0f0f0',
-      }}
-    >
+    <Flex vertical style={{ height: '100%' }}>
       <List
         itemLayout="horizontal"
         size="small"
-        style={{ maxHeight: 300, padding: '0.5em 0.75em', overflow: 'auto' }}
+        style={{
+          maxHeight: 300,
+          margin: '0 12px',
+          overflow: 'auto',
+        }}
         dataSource={items}
         renderItem={(item) => (
-          <List.Item style={{ padding: '0.5em 0.75em' }}>
+          <List.Item style={{ padding: '0.5em 0.25em' }}>
             <Flex
               justify="space-between"
               align="center"
@@ -82,14 +80,14 @@ export const NowPlaying: React.FC = () => {
               style={{ width: '100%', maxWidth: '100%' }}
             >
               <Flex vertical style={{ overflow: 'hidden' }}>
-                <Text strong ellipsis style={{ lineHeight: 1.5 }}>
+                <Text strong ellipsis>
                   {item.vodName}
                 </Text>
                 <Text
                   type="secondary"
                   ellipsis
                   title={item.url}
-                  style={{ lineHeight: 1.5 }}
+                  style={{ fontSize: 12, lineHeight: 1.4 }}
                 >
                   {item.url}
                 </Text>
@@ -103,13 +101,12 @@ export const NowPlaying: React.FC = () => {
               >
                 <Button
                   type="text"
-                  size="large"
                   shape="circle"
                   icon={
                     item.vodId === currentVodId && isCurrentTabOpen ? (
-                      <PlayCircleTwoTone />
+                      <PlayCircleTwoTone style={{ fontSize: 18 }} />
                     ) : (
-                      <PlayCircleOutlined />
+                      <PlayCircleOutlined style={{ fontSize: 18 }} />
                     )
                   }
                   onClick={async () => {
@@ -146,10 +143,9 @@ export const NowPlaying: React.FC = () => {
                   >
                     <Button
                       type="text"
-                      size="large"
                       shape="circle"
                       danger
-                      icon={<MinusCircleOutlined />}
+                      icon={<MinusCircleOutlined style={{ fontSize: 18 }} />}
                     />
                   </Popconfirm>
                 )}
