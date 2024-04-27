@@ -143,32 +143,32 @@ export const BWP_VODS: {
     },
   },
 
-  // {
-  //   id: 'youtube',
-  //   name: 'YouTube',
-  //   hostnames: ['www.youtube.com', 'm.youtube.com', 'youtu.be'],
+  {
+    id: 'youtube',
+    name: 'YouTube',
+    hostnames: ['www.youtube.com', 'm.youtube.com', 'youtu.be'],
 
-  //   getVideoId: (url: string | URL) => {
-  //     try {
-  //       const { hostname, pathname, searchParams } = new URL(url)
+    getVideoId: (url: string | URL) => {
+      try {
+        const { hostname, pathname, searchParams } = new URL(url)
 
-  //       if (hostname === 'youtu.be') {
-  //         return pathname.slice(1) ?? null
-  //       }
+        if (hostname === 'youtu.be') {
+          return pathname.slice(1) ?? null
+        }
 
-  //       return searchParams.get('v') ?? null
-  //     } catch {}
+        return searchParams.get('v') ?? null
+      } catch {}
 
-  //     return null
-  //   },
+      return null
+    },
 
-  //   getWatchPageUrl: (videoId: string) => {
-  //     const url = new URL('/watch', 'https://www.youtube.com')
-  //     url.searchParams.set('v', videoId)
+    getWatchPageUrl: (videoId: string) => {
+      const url = new URL('/watch', 'https://www.youtube.com')
+      url.searchParams.set('v', videoId)
 
-  //     return url.href
-  //   },
-  // },
+      return url.href
+    },
+  },
 
   // {
   //   id: 'niconico',

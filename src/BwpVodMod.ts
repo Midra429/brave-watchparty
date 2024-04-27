@@ -65,11 +65,15 @@ export class BwpVodMod {
         if (playing) {
           this.#video?.play()
         } else {
-          this.#video?.pause()
-
           if (typeof playing_time !== 'undefined' && this.#video) {
-            this.#video.currentTime = playing_time
+            if (playing_time < this.#video.duration) {
+              this.#video.currentTime = playing_time
+            } else {
+              this.#video.currentTime = playing_time - 0.5
+            }
           }
+
+          this.#video?.pause()
         }
       }, 2000)
     }
