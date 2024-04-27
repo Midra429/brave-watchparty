@@ -1,7 +1,7 @@
 {
   "name": "brave-watchparty",
   "displayName": "Brave Watchparty",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "説明しよう！君たちと私の熱い魂が呼応した時、開催するように設定してある、その名もブレイブウォッチパーティ。",
   "author": "Midra",
   "scripts": {
