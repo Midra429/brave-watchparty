@@ -1,6 +1,7 @@
 import type { entities as MisskeyEntities } from 'misskey-js'
 import type { D1RoomData } from '@/types/d1'
 import type { BwpVodId } from '@/utils/vods'
+import type { OsName, BrowserName } from '@/utils/getEnvironment'
 
 export type StorageItems = Partial<{
   mode: 'guest' | 'host'
@@ -19,7 +20,11 @@ export type StorageItems = Partial<{
     name: string | null
     avatar: string | null
     vod_ids: BwpVodId[] | null
-    version: string | null
+    environment: {
+      Version: string
+      Browser: BrowserName
+      OS: OsName
+    } | null
   }[]
   joined_state_ping: number
 

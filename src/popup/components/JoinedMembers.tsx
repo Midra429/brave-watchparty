@@ -16,9 +16,16 @@ export const JoinedMembers: React.FC = () => {
     useState<NonNullable<StorageItems['joined_members']>[number]>()
 
   const [mode] = useStorage('mode')
+  const [server] = useStorage('misskey_server')
+  const [user] = useStorage('misskey_user')
   const [members] = useStorage('joined_members')
 
   const isHost = mode === 'host'
+  const isMidra =
+    server &&
+    ['submarin.online', 'team.matechan.com'].includes(server) &&
+    user?.username === 'Midra'
+
   const memberDetailVodNames = memberDetail?.vod_ids?.flatMap(
     (id) => getVodById(id)?.name ?? []
   )
@@ -48,7 +55,7 @@ export const JoinedMembers: React.FC = () => {
                 id={member.id}
               />
 
-              {isHost && (
+              {(isHost || isMidra) && (
                 <Button
                   type="text"
                   shape="circle"
@@ -73,15 +80,7 @@ export const JoinedMembers: React.FC = () => {
         setOpen={setIsDrawerOpen}
       >
         {memberDetail && (
-          <Flex
-            vertical
-            gap="middle"
-            style={{
-              height: '100%',
-              padding: 12,
-              overflow: 'hidden',
-            }}
-          >
+          <Flex vertical gap="middle" style={{ padding: 12 }}>
             <UserItem
               size="large"
               avatar={memberDetail.avatar}
@@ -105,9 +104,15 @@ export const JoinedMembers: React.FC = () => {
               ))}
             </Flex>
 
-            <Text type="secondary" style={{ fontSize: 12 }}>
-              バージョン: {memberDetail.version}
-            </Text>
+            {memberDetail.environment && (
+              <Flex justify="space-between">
+                {Object.entries(memberDetail.environment).map(([key, val]) => (
+                  <Text type="secondary" style={{ fontSize: 12 }} key={key}>
+                    {key}: {<Text style={{ fontSize: 12 }}>{val}</Text>}
+                  </Text>
+                ))}
+              </Flex>
+            )}
 
             {/* <Popconfirm
               title="追放しますか？"

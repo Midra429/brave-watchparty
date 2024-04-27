@@ -8,6 +8,7 @@ import { BACKEND_URL } from '@/constants'
 import { webext } from '@/webext'
 import { storage } from '@/utils/storage'
 import { RoomAPI } from './room'
+import { getEnvironment } from '@/utils/getEnvironment'
 
 export type AblyMessageData = {
   video: {
@@ -49,7 +50,7 @@ const presenceMessagesToMembers = (
       name: data?.name ?? null,
       avatar: data?.avatar ?? null,
       vod_ids: data?.vod_ids ?? null,
-      version: data?.version ?? null,
+      environment: data?.environment ?? null,
     }
   })
 }
@@ -249,12 +250,17 @@ export class AblyApi {
         'vod_ids',
         'misskey_user'
       )
+      const environment = await getEnvironment()
 
       this.#channel?.presence.enter({
         name: misskey_user?.name,
         avatar: misskey_user?.avatarUrl,
         vod_ids: vod_ids,
-        version: manifest.version,
+        environment: {
+          Version: manifest.version,
+          Browser: environment.browser,
+          OS: environment.os,
+        },
       } as PresenceData)
     })
 
