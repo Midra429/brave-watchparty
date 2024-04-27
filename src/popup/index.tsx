@@ -29,7 +29,7 @@ const Popup: React.FC = () => {
 
   const hasHostPrivileges = !!myRoom
   const isLogin = !!misskeyToken
-  const isJoined = isLogin && !!joinedRoom
+  const isJoined = !!joinedRoom
   const canDrawerOpen = isLogin && !isJoined
 
   return (
