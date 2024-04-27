@@ -5,7 +5,7 @@ import { storage } from '@/utils/storage'
 import { isCurrentTab } from '@/utils/isCurrentTab'
 
 export const config: PlasmoCSConfig = {
-  matches: ['https://abema.tv/*'],
+  matches: ['https://abema.tv/video/episode/*'],
   run_at: 'document_start',
 }
 

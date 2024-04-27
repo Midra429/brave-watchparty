@@ -5,7 +5,7 @@ import { storage } from '@/utils/storage'
 import { isCurrentTab } from '@/utils/isCurrentTab'
 
 export const config: PlasmoCSConfig = {
-  matches: ['https://video.unext.jp/*'],
+  matches: ['https://video.unext.jp/play/*'],
   run_at: 'document_start',
 }
 

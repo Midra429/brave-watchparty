@@ -6,7 +6,7 @@ import { isCurrentTab } from '@/utils/isCurrentTab'
 import { isVisible } from '@/utils/isVisible'
 
 export const config: PlasmoCSConfig = {
-  matches: ['https://www.amazon.co.jp/*'],
+  matches: ['https://www.amazon.co.jp/gp/video/detail/*'],
   run_at: 'document_start',
 }
 

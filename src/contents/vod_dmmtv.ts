@@ -5,7 +5,7 @@ import { storage } from '@/utils/storage'
 import { isCurrentTab } from '@/utils/isCurrentTab'
 
 export const config: PlasmoCSConfig = {
-  matches: ['https://tv.dmm.com/*'],
+  matches: ['https://tv.dmm.com/vod/playback/*'],
   run_at: 'document_start',
 }
 

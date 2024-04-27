@@ -5,7 +5,7 @@ import { storage } from '@/utils/storage'
 import { isCurrentTab } from '@/utils/isCurrentTab'
 
 export const config: PlasmoCSConfig = {
-  matches: ['https://animestore.docomo.ne.jp/*'],
+  matches: ['https://animestore.docomo.ne.jp/animestore/sc_d_pc?partId=*'],
   run_at: 'document_start',
 }
 
