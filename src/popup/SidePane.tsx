@@ -10,7 +10,6 @@ export const SidePane: React.FC = () => {
   return (
     <Flex
       vertical
-      gap="small"
       style={{
         width: 300,
         borderRight: '1px solid #f0f0f0',

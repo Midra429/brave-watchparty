@@ -37,7 +37,7 @@ export const JoinedMembers: React.FC = () => {
         size="small"
         style={{
           maxHeight: 300,
-          margin: '0 12px',
+          padding: '8px 12px',
           overflow: 'auto',
         }}
         dataSource={members}
