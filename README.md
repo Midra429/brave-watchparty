@@ -1,33 +1,39 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+# <sub><img src="assets/icon.png" width="30px" height="30px"></sub> Brave Watchparty
 
-## Getting Started
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/cfofaogegcignolcaibnfcnpcnohfpaj?label=Chrome%20Web%20Store)](https://chromewebstore.google.com/detail/cfofaogegcignolcaibnfcnpcnohfpaj)
+[![Firefox Add-ons](https://img.shields.io/amo/v/brave-watchparty?label=Firefox%20Add-ons)](https://addons.mozilla.org/ja/firefox/addon/brave-watchparty/)
 
-First, run the development server:
+[<img src="assets/badges/chrome.png" height="60px">](https://chromewebstore.google.com/detail/cfofaogegcignolcaibnfcnpcnohfpaj)
+[<img src="assets/badges/firefox.png" height="60px">](https://addons.mozilla.org/ja/firefox/addon/brave-watchparty/)
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+## 概要
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+複数動画配信サービスに対応した同時視聴ツールです。<br>
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
+## 対応している動画配信サービス
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+- [Prime Video](https://www.amazon.co.jp/gp/video/storefront/)
+- [dアニメストア](https://animestore.docomo.ne.jp/animestore/)
+- [DMM TV](https://tv.dmm.com/vod/)
+- [U-NEXT](https://video.unext.jp/)
+- [ABEMA](https://abema.tv/)
+- [YouTube](https://www.youtube.com/)
 
-## Making production build
+## 使い方
+https://blog.midra.me/posts/11
 
-Run the following:
+## インストール
 
-```bash
-pnpm build
-# or
-npm run build
-```
+### Chrome Web Store
+https://chromewebstore.google.com/detail/cfofaogegcignolcaibnfcnpcnohfpaj
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
+### Firefox Add-ons
+https://addons.mozilla.org/ja/firefox/addon/brave-watchparty/
 
-## Submit to the webstores
+## 不具合報告・機能提案など
+- GitHubの[Issues](https://github.com/Midra429/brave-watchparty/issues)
+- SNSアカウント宛にメッセージやメンション
+  - Misskey: [@Midra@submarin.online](https://submarin.online/@Midra)
 
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+## ライセンス
+当ライセンスは [MIT](LICENSE.txt) ライセンスの規約に基づいて付与されています。
